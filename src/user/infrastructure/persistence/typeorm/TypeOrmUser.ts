@@ -16,6 +16,9 @@ export class TypeOrmUser {
   @Column()
   email: string;
 
+  @Column()
+  password: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }

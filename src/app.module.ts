@@ -12,7 +12,7 @@ import * as Joi from '@hapi/joi';
   imports: [
     ConfigModule.forRoot({
       validationSchema: Joi.object({
-        DATABASE_NAME: Joi.string().required(),
+        DATABASE_USERNAME: Joi.string().required(),
         DATABASE_PASSWORD: Joi.string().required(),
       }),
     }),

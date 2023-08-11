@@ -64,4 +64,16 @@ describe('UserCreator', () => {
     expect(SUT.execute(request)).rejects.toThrow(InvalidArgument);
     expect(mockRepository.save).not.toHaveBeenCalled();
   });
+
+  it('should throws an error when creating a user with an invalid password', () => {
+    const user = UserMother.create();
+
+    const request: UserCreatorRequest = {
+      ...user.toPrimitives(),
+      password: '',
+    };
+
+    expect(SUT.execute(request)).rejects.toThrow(InvalidArgument);
+    expect(mockRepository.save).not.toHaveBeenCalled();
+  });
 });
