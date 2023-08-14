@@ -1,9 +1,11 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { genSalt, hash } from 'bcrypt';
 
 @Entity('user')
 export class TypeOrmUser {
@@ -21,4 +23,10 @@ export class TypeOrmUser {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @BeforeInsert()
+  async hashPassword() {
+    const salt = await genSalt();
+    this.password = await hash(this.password, salt);
+  }
 }
