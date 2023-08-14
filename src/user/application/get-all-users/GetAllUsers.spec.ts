@@ -26,4 +26,12 @@ describe('GetAllUsers', () => {
 
     expect(SUT.execute()).resolves.toHaveLength(2);
   });
+
+  it('should return the users without password', async () => {
+    const userMock = UserMother.create();
+    mockRepository.getAll.mockResolvedValue([userMock]);
+    const { password, ...result } = userMock.toPrimitives();
+
+    expect(SUT.execute()).resolves.toEqual([result]);
+  });
 });

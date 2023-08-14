@@ -9,6 +9,8 @@ export class GetAllUsers {
   async execute(): Promise<GetAllUsersResponse[]> {
     const users = await this.repository.getAll();
 
-    return users.map((user) => user.toPrimitives());
+    return users
+      .map((user) => user.toPrimitives())
+      .map(({ password, ...result }) => result);
   }
 }
