@@ -20,4 +20,10 @@ export class UserService {
     const rawUsers = await this.userRepository.find();
     return rawUsers.map((rawUser) => User.fromPrimitives(rawUser));
   }
+
+  async findOneById(id: string): Promise<User | undefined> {
+    const user = await this.userRepository.findOne({ where: { id } });
+
+    return user ? User.fromPrimitives(user) : undefined;
+  }
 }

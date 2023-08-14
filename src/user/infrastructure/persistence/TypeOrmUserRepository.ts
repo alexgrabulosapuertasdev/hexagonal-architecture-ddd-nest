@@ -14,4 +14,8 @@ export class TypeOrmUserRepository implements UserRepository {
   getAll(): Promise<User[]> {
     return this.service.findAll();
   }
+
+  getOneById(id: string): Promise<User> {
+    return this.service.findOneById(id);
+  }
 }

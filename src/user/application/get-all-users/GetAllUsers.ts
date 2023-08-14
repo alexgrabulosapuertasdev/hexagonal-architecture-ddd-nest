@@ -6,7 +6,7 @@ import { GetAllUsersResponse } from './GetAllUsersResponse';
 export class GetAllUsers {
   constructor(private readonly repository: UserRepository) {}
 
-  async execute(): Promise<GetAllUsersResponse[]> {
+  async execute(): Promise<GetAllUsersResponse> {
     const users = await this.repository.getAll();
 
     return users

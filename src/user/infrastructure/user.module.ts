@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUser } from './persistence/typeorm/TypeOrmUser';
 import { GetAllUsers } from '../application/get-all-users/GetAllUsers';
+import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUser])],
@@ -16,6 +17,7 @@ import { GetAllUsers } from '../application/get-all-users/GetAllUsers';
     { provide: UserRepository, useClass: TypeOrmUserRepository },
     UserCreator,
     GetAllUsers,
+    GetOneUserById,
   ],
 })
 export class UserModule {}

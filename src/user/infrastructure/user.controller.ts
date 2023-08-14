@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { UserCreator } from '../application/user-creator/UserCreator';
 import { GetAllUsers } from '../application/get-all-users/GetAllUsers';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserId } from '../domain/UserId';
-import { FindAllUserResponseDto } from './dto/find-all-user-response.dto';
+import { UserResponseDto } from './dto/user-response.dto';
+import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById';
 
 @ApiTags('user')
 @Controller('user')
@@ -12,6 +13,7 @@ export class UserController {
   constructor(
     private readonly userCreator: UserCreator,
     private readonly getAllUsers: GetAllUsers,
+    private readonly getOneUserById: GetOneUserById,
   ) {}
 
   @Post()
@@ -26,8 +28,14 @@ export class UserController {
   }
 
   @Get()
-  @ApiOkResponse({ type: [FindAllUserResponseDto] })
-  findAll(): Promise<FindAllUserResponseDto[]> {
+  @ApiOkResponse({ type: [UserResponseDto] })
+  findAll(): Promise<UserResponseDto[]> {
     return this.getAllUsers.execute();
+  }
+
+  @Get(':id')
+  @ApiOkResponse({ type: UserResponseDto })
+  findOneById(@Param('id') id: string): Promise<UserResponseDto> {
+    return this.getOneUserById.execute(id);
   }
 }
