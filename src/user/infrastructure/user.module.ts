@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmUser } from './persistence/typeorm/TypeOrmUser';
 import { GetAllUsers } from '../application/get-all-users/GetAllUsers';
 import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById';
+import { UpdateUser } from '../application/update-user/UpdateUser';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUser])],
@@ -18,6 +19,7 @@ import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById
     UserCreator,
     GetAllUsers,
     GetOneUserById,
+    UpdateUser,
   ],
 })
 export class UserModule {}

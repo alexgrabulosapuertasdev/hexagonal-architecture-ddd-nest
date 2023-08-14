@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -25,6 +26,7 @@ export class TypeOrmUser {
   createdAt: Date;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword() {
     const salt = await genSalt();
     this.password = await hash(this.password, salt);
