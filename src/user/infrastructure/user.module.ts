@@ -9,6 +9,7 @@ import { TypeOrmUser } from './persistence/typeorm/TypeOrmUser';
 import { GetAllUsers } from '../application/get-all-users/GetAllUsers';
 import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById';
 import { UpdateUser } from '../application/update-user/UpdateUser';
+import { DeleteUser } from '../application/delete-user/DeleteUser';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUser])],
@@ -20,6 +21,7 @@ import { UpdateUser } from '../application/update-user/UpdateUser';
     GetAllUsers,
     GetOneUserById,
     UpdateUser,
+    DeleteUser,
   ],
 })
 export class UserModule {}

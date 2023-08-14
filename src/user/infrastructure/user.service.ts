@@ -26,4 +26,8 @@ export class UserService {
 
     return user ? User.fromPrimitives(user) : undefined;
   }
+
+  async delete(id: string): Promise<void> {
+    await this.userRepository.delete({ id });
+  }
 }

@@ -18,4 +18,8 @@ export class TypeOrmUserRepository implements UserRepository {
   getOneById(id: string): Promise<User> {
     return this.service.findOneById(id);
   }
+
+  delete(id: string): Promise<void> {
+    return this.service.delete(id);
+  }
 }

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,6 +16,7 @@ import { GetOneUserById } from '../application/get-one-user-by-id/GetOneUserById
 import { UpdateUser } from '../application/update-user/UpdateUser';
 import { UserCreator } from '../application/user-creator/UserCreator';
 import { UserId } from '../domain/UserId';
+import { DeleteUser } from '../application/delete-user/DeleteUser';
 
 @ApiTags('user')
 @Controller('user')
@@ -17,6 +26,7 @@ export class UserController {
     private readonly getAllUsers: GetAllUsers,
     private readonly getOneUserById: GetOneUserById,
     private readonly updateUser: UpdateUser,
+    private readonly deleteUser: DeleteUser,
   ) {}
 
   @Post()
@@ -51,5 +61,10 @@ export class UserController {
       ...updateUserDto,
       id,
     });
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string): Promise<void> {
+    return this.deleteUser.execute(id);
   }
 }
